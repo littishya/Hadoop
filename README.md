@@ -41,194 +41,51 @@ Output Generation: Finally, generated output files summarizing the findings of o
   - YARN (Yet Another Resource Negotiator): YARN is a resource management layer that enables efficient resource allocation and job scheduling in Hadoop clusters. It allows multiple processing frameworks, such as MapReduce, Apache Spark, and Apache Flink, to run concurrently on the same cluster.
   - Hadoop Common: Hadoop Common provides the essential libraries and utilities required by other Hadoop modules. It includes tools for managing Hadoop clusters, interacting with HDFS, and performing administrative tasks.
   - Hadoop Ecosystem Projects: The Hadoop ecosystem consists of a vast array of projects and tools that integrate with Hadoop to extend its capabilities. These include Apache Hive for data warehousing, Apache Pig for data processing, Apache HBase for real-time NoSQL databases, and Apache Spark for in-memory data processing, among others.
-### Docker: Containerization for Portability
+### Docker 
 
-- Docker is a containerization platform that simplifies the process of
-  developing, deploying, and running applications
-- It allows developers to package an application and its dependencies into a
-  lightweight, portable container
-- These containers can run consistently across different environments, ensuring
-  that the application behaves the same way in development, testing, and
-  production
-- Docker provides a standardized way to encapsulate and distribute applications,
-  making it easier to manage dependencies, streamline deployment, and enhance
-  collaboration among development teams.
+-> Docker is a platform that enables developers to package applications and their dependencies into containers, providing an isolated environment for seamless deployment across different systems.
 
-- The Dockerfile specifies the use of an official Python runtime as the base
-  image, installs the Redis server, and copies the Python script and mock
-  database file into the container. The resulting Docker image encapsulates the
-  entire project, making it easily deployable and scalable.
+Description of Files:
 
-- By using Docker, the project achieves portability and encapsulation, allowing
-  developers to run the application in any environment with minimal setup.
+1. core-site.xml: Configuration file for Hadoop's core services, specifying parameters like the default file system and Hadoop's internal directories.
+2. Dockerfile: A text file containing instructions for building a Docker image, including the base image, dependencies, and commands to run when the container starts.
+3. execut.sh: Shell script used for executing tasks within the Docker container, often containing commands to start Hadoop services or run MapReduce jobs.
+4. framework.py: Python script implementing the data processing framework, defining tasks such as data aggregation, analysis, or visualization.
+5. hdfs-site.xml: Configuration file for Hadoop Distributed File System (HDFS), specifying parameters related to data replication, block size, and other storage settings.
+6. mapper.py: Python script defining the mapping function for a MapReduce job, responsible for processing input data and emitting intermediate key-value pairs.
+7. mapred-site.xml: Configuration file for MapReduce job execution, specifying parameters like the number of map and reduce tasks, memory allocation, and job scheduling.
+8. reducer.py: Python script defining the reducing function for a MapReduce job, responsible for aggregating and processing intermediate key-value pairs to produce the final output.
+9. Train.csv: The dataset file containing BigMart Sales Data, which serves as input for data processing tasks.
+10. yarn-site.xml: Configuration file for Yet Another Resource Negotiator (YARN), specifying parameters for resource management, job scheduling, and application execution in Hadoop clusters.
 
 ## Docker implementation
 
-- The Docker system designed for this project follows a logical sequence to
-  ensure a smooth and consistent environment for both development and deployment
-
-- Let's delve into the intricacies of the Docker system logic:
-
-- Project Setup:
-  - Begin with organizing your project files within a directory structure. The
-    main files include:
-    - `Redis_cache_to_fetch_user_profile.ipynb`: Contains the Jupyter Notebook
-      code for fetching user profiles with Redis caching.
-    - `Dockerfile`: Includes instructions for building a Docker image for the
-      project.
-    - `Docker-compose.yaml`: Defines services, networks, and volumes for Docker
-      containers.
-
-- Dockerfile Configuration:
-  - Start by setting up the Dockerfile with the following steps:
-    - Utilize an official Python runtime as the base image `python:3.8-slim`
-    - Set the working directory in the container to `/app`.
-    - Copy the project files into the container.
-    - Install necessary dependencies (redis and notebook) using pip.
-    - `Expose port 8888` for the Jupyter Notebook server.
-    - Specify the default command to run the Jupyter Notebook server.
-
-- Docker-compose.yaml Configuration:
-  - Configure the docker-compose.yaml file to define the services required for
-    the project:
-    - Define two services: redis and notebook.
-    - Configure the redis service:
-      - Use the official redis:latest image.
-      - Map `port 6378` on the host to `port 6379` in the container.
-      - Set the container name as redis-server.
-    - Configure the notebook service:
-      - Use the custom Docker image built from the Dockerfile.
-      - Map `port 8888` on the host to `port 8888` in the container.
-      - Set the `REDIS_HOST` environment variable to redis.
-      - Make it dependent on the redis service.
-      - Specify the container name as `notebook-server`.
-      - Mount the project directory into the container at `/app`.
-
-- Building the Docker Image:
-  - Execute `docker build -t <your_image_name> .` to build the Docker image
-    using the Dockerfile.
-  - Replace `<your_image_name>` with a suitable name for the Docker image.
-
-- Running the Docker Containers:
-  - Start the Docker containers with `docker-compose up`.
-  - Docker Compose will create and launch containers for the redis and notebook
-    services.
-  - Access the Jupyter Notebook server at `http://localhost:8888` in a web
-    browser.
-
-- Accessing the Jupyter Notebook Server:
-  - Navigate to `http://localhost:8888` in a web browser to access the Jupyter
-    Notebook interface.
-  - Interact with your notebook file (Redis_cache_to_fetch_user_profile.ipynb)
-    to execute code for fetching user profiles using Redis caching.
-
-- Stopping the Docker Containers:
-  - To stop containers, press `Ctrl + C` in the terminal running
-    `docker-compose up`.
-  - Alternatively, use `docker-compose down` to stop and remove containers.
-
-## 3. Python Script Overview
-
-The Redis Cache to Fetch User Profiles script demonstrates an efficient approach
-to user profile caching using Redis. The script is structured to fetch user
-profiles from a mock database, implement caching with Redis, and showcase the
-seamless integration of Docker for containerization.
-
-The script is primarily divided into three sections:
-
-- Set up Redis Connection: The script begins by establishing a connection to a
-  Redis server to enable caching of user profiles.The `REDIS_HOST` environment
-  variable is utilized to dynamically specify the host address of the Redis
-  server.
-
-- Mock Database: The json data is saved in a variable in the script. User can
-  also include an externl json file.
-
-- Fetch User Profile Function:
-  - Implements the `fetch_user_profile` function to read the mock database file
-    and retrieve a user's profile based on their ID.
-  - Implements the `get_user_profile` function to check if the user's profile is
-    in the Redis cache, fetches it if present, or retrieves it from the mock
-    database, stores it in the cache, and returns the profile.
-
-- Example Usage: Provides an example usage at the end of the script,
-  demonstrating how to fetch a user's profile using the caching mechanism.
-
-- Example Output: Let's walk through the script's functionality with an example:
-  ```
-  user_id_to_fetch = '123'
-  user_profile = get_user_profile(user_id_to_fetch)
-  print(f"Fetched user profile: {user_profile}")
-  ```
-
-- Output Explanation:
-  - If the user profile is in the Redis cache:
-    ```
-    User profile for 123 found in Redis cache.
-    Fetched user profile: {'user_id': '123', 'name': 'Shaunak Dhande', 'email': 'shaunakdhande4000@gmail.com', 'age': 22}
-    ```
-  - If the user profile is not in the Redis cache:
-    ```
-    User profile for 123 not found in cache. Fetched from the database and stored in Redis.
-    Fetched user profile: {'user_id': '123', 'name': 'Shaunak Dhande', 'email': 'shaunakdhande4000@gmail.com', 'age': 22}
-    ```
-
-## 4. Mock Database Schema
-
-The mock database follows a simple JSON structure where each user profile is
-represented as a dictionary. The schema includes the user's ID, name, email, and
-age.
-```
-{
-  "123": {
-    "user_id": "123",
-    "name": "Shaunak Dhande",
-    "email": "shaunakdhande4000@gmail.com",
-    "age": 22
-  },
-  "456": {
-    "user_id": "456",
-    "name": "Alice Johnson",
-    "email": "alice.johnson@example.com",
-    "age": 30
-  },
-  // Additional profiles...
-}
-```
 
 ## 5. Project Diagram
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Script
-    participant Redis
-    participant Database
+                     +-------------------------------------+
+                     |             Docker Host             |
+                     +-------------------------------------+
+                              |                |
+                    +---------+--------------------------+
+                    |                                  |
+       +-----------------------------+    +-----------------------------+
+       |          Docker           |    |          Docker           |
+       |     Container: Hadoop    |    |     Container: Python    |
+       +-----------------------------+    +-----------------------------+
+                    |                                  |
+       +----------------------------------+   +----------------------------------+
+       |               Hadoop             |   |               Python             |
+       |      - HDFS                      |   |      - Data Processing          |
+       |      - MapReduce                 |   |      - MapReduce Scripts        |
+       |      - YARN                      |   |      - Data Analysis            |
+       +----------------------------------+   +----------------------------------+
+                    |                                  |
+      +------------------------------------------------------------+
+      |                        Data Storage                       |
+      |                 - Train.csv (BigMart Sales Data)          |
+      +------------------------------------------------------------+
 
-    User->>Script: Request profile for '123'
-    Script->>Redis: Check cache for '123'
-    alt Profile in Redis Cache
-        Redis-->>Script: Return cached profile
-    else Profile not in Redis Cache
-        Script->>Database: Fetch profile for '123'
-        Database-->>Script: Return user profile
-        Script->>Redis: Store profile in cache
-        Redis-->>Script: Confirm profile stored
-    end
-    Script-->>User: Return user profile
-```
 
 ## 6. Conclusion
 
-The Redis Cache to Fetch User Profiles project establishes an effective synergy
-between Redis caching, Python scripting, and Docker containerization. By
-prioritizing efficient user profile retrieval, the project showcases the power
-of Redis in optimizing data access, minimizing database load, and enhancing
-overall system responsiveness. The seamless integration of Docker ensures a
-consistent and portable environment, simplifying deployment across various
-platforms. With its clear logical structure, illustrated diagrams, and practical
-example usage, the project serves as a valuable resource for developers looking
-to implement robust caching mechanisms in their applications. While achieving
-its primary goals, the project also opens avenues for future enhancements,
-encouraging exploration of advanced Redis features and scalability
-considerations.
