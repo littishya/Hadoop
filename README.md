@@ -125,6 +125,7 @@ To run the Docker system  follow these steps:
 First, build the Docker image using the provided Dockerfile. Navigate to the directory containing the Dockerfile and run the following command:
 
  > docker build -t hadoop-cluster .
+
 [2] Start Docker Container
 
 Once the image is built, start a Docker container using the following command:
@@ -134,32 +135,32 @@ Once the image is built, start a Docker container using the following command:
 [3] Verify Hadoop Installation
 Once inside the container, verify that Hadoop is installed and configured correctly by running Hadoop commands.
 
-cd /home/hadoop/data
-pwd
-hadoop fs -ls
+> cd /home/hadoop/data
+> pwd
+> hadoop fs -ls
 
 [4] Prepare Input Data
 If needed, upload input data to HDFS using the following commands:
 
-hadoop fs -mkdir -p input
-hdfs dfs -put Train.csv input
+> hadoop fs -mkdir -p input
+> hdfs dfs -put Train.csv input
 
 [5] Run MapReduce Job
 After uploading input data, execute a MapReduce job using the provided scripts. 
 
-hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar -D mapreduce.job.reduces=5 -file mapper.py -mapper "python3 mapper.py" -file reducer.py -reducer "python3 reducer.py" -input input -output output
+> hadoop jar /usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar -D mapreduce.job.reduces=5 -file mapper.py -mapper "python3 mapper.py" -file reducer.py -reducer "python3 reducer.py" -input input -output output
 
 [6] Retrieve Output
 Once the MapReduce job completes, retrieve the output from HDFS and examine the results. 
 
-hadoop fs -copyToLocal output .
+> hadoop fs -copyToLocal output .
 
 [7] Inspect Output
 Finally, inspect the output files to view the results of the MapReduce job. 
 
-cd output
-ls
-cat part-00001
+> cd output
+> ls
+> cat part-00001
 
 [8] OUTPUT OBTAINED
 
