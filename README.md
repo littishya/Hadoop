@@ -30,33 +30,17 @@ Output Generation: Finally, generated output files summarizing the findings of o
 
 ### Hadoop: 
 
---> Redis is an advanced key-value store known for its speed and versatility
---> Functioning as an in-memory data structure store, Redis holds data in RAM,
-  allowing for fast read and write operations
-- It supports various data structures, including strings, hashes, lists, and
-  sets, making it suitable for a wide range of use cases
-- Redis is often used as a caching mechanism to boost the performance of
-  applications by reducing the time it takes to retrieve frequently accessed
-  data
-- Additionally, its support for advanced features like pub/sub messaging and
-  transactions makes it a valuable tool for building scalable and responsive
-  systems.
+--> Hadoop is an open-source framework designed to handle big data processing and storage in distributed computing environments. It provides a scalable, fault-tolerant ecosystem for storing and processing vast amounts of data across clusters of commodity hardware.
 
-- Redis serves as the backbone of this project, providing an in-memory data
-  structure for key-value pair storage and retrieval. In the context of the
-  project, Redis is employed as a caching mechanism
-- The speed of data retrieval from Redis significantly outpaces traditional
-  databases, making it an ideal choice for scenarios where rapid access to
-  frequently used data, such as user profiles, is paramount.
+--> At its core, Hadoop consists of two primary components: the Hadoop Distributed File System (HDFS) and the MapReduce programming model. HDFS is a distributed file system designed to store large datasets reliably across multiple machines. It divides files into blocks and replicates them across different nodes in the cluster to ensure fault tolerance and data availability.
 
-- The function that retrieved user profiles showcases the power of Redis caching.
-- It first checks if the user's profile is already present in the Redis cache
-  - If found, the profile is retrieved directly from Redis
-  - If not found, the script fetches the profile from the mock database, stores
-    it in Redis for future use, and then returns the profile
-- This use of Redis caching optimizes the overall performance of the application
-  by reducing the load on the underlying data source
+--> The MapReduce programming model is a parallel processing paradigm for distributed data processing. It divides computational tasks into two phases: the Map phase and the Reduce phase. During the Map phase, input data is processed in parallel across multiple nodes in the cluster, generating intermediate key-value pairs. These intermediate results are then aggregated and processed further during the Reduce phase to produce the final output.
 
+-->Hadoop also includes a variety of other components and modules that extend its functionality, such as:
+
+  - YARN (Yet Another Resource Negotiator): YARN is a resource management layer that enables efficient resource allocation and job scheduling in Hadoop clusters. It allows multiple processing frameworks, such as MapReduce, Apache Spark, and Apache Flink, to run concurrently on the same cluster.
+  - Hadoop Common: Hadoop Common provides the essential libraries and utilities required by other Hadoop modules. It includes tools for managing Hadoop clusters, interacting with HDFS, and performing administrative tasks.
+  - Hadoop Ecosystem Projects: The Hadoop ecosystem consists of a vast array of projects and tools that integrate with Hadoop to extend its capabilities. These include Apache Hive for data warehousing, Apache Pig for data processing, Apache HBase for real-time NoSQL databases, and Apache Spark for in-memory data processing, among others.
 ### Docker: Containerization for Portability
 
 - Docker is a containerization platform that simplifies the process of
