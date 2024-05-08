@@ -164,15 +164,15 @@ Finally, inspect the output files to view the results of the MapReduce job.
 
 [8] OUTPUT OBTAINED
 
-Breads  2204.132226294819
+> Breads  2204.132226294819
 
-Dairy   2232.5425970674455
+> Dairy   2232.5425970674455
 
-Frozen Foods    2132.8677436915887
+> Frozen Foods    2132.8677436915887
 
-Health and Hygiene      2010.000265000001
+> Health and Hygiene      2010.000265000001
 
-Soft Drinks     2006.5117348314602
+> Soft Drinks     2006.5117348314602
 
 The output provided represents the data aggregated value calculated for each category based on the input data processed by the MapReduce job. Each line consists of a category name followed by its corresponding average value. 
 
