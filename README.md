@@ -1,2 +1,2 @@
 # Hadoop
-Data. Aggregation using Apache Hadoop
+Data Aggregation using Apache Hadoop
