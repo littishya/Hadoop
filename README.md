@@ -71,7 +71,7 @@ Output Generation: Finally, generated output files summarizing the findings of o
 Description of Files:
 
 1. core-site.xml: Configuration file for Hadoop's core services, specifying parameters like the default file system and Hadoop's internal directories.
-2. Dockerfile: A text file containing instructions for building a Docker image, including the base image, dependencies, and commands to run when the container starts.
+2. Dockerfile: This text file containing instructions for building a Docker image, including the base image, dependencies, and commands to run when the container starts.
 3. execut.sh: Shell script used for executing tasks within the Docker container, often containing commands to start Hadoop services or run MapReduce jobs.
 4. framework.py: Python script implementing the data processing framework, defining tasks such as data aggregation, analysis, or visualization.
 5. hdfs-site.xml: Configuration file for Hadoop Distributed File System (HDFS), specifying parameters related to data replication, block size, and other storage settings.
@@ -195,12 +195,61 @@ The average values provide insights into the distribution or characteristics of 
 These average values can inform decision-making processes for businesses. For example, based on the average values, businesses can adjust pricing strategies, allocate resources to different product categories, or identify areas for improvement or investment.
 
 
-
-## System Architecture
-
 # Project Documentation
 
+#### [1] Dockerfile
 
+This text file containing instructions for building a Docker image, including the base image, dependencies, and commands to run when the container starts.
+
+##### -->  Docker file system architecture used in a diagram 
+                    +----------------------------------------------------+
+                    |                   Docker Host                      |
+                    +----------------------------------------------------+
+                              |
+                              |
+                              v
+                    +----------------------------------------------------+
+                    |                  Docker Engine                    |
+                    +----------------------------------------------------+
+                              |
+                              |
+                    +----------------------------------------------------+
+                    |                  Hadoop Container                 |
+                    |          (HDFS, YARN, MapReduce, SSH)             |
+                    |                  Ubuntu:latest                    |
+                    |            OpenJDK 8, Hadoop 3.3.1                |
+                    +----------------------------------------------------+
+                              |
+                              |
+                    +----------------------------------------------------+
+                    |                Data and Scripts                   |
+                    |    (mapper.py, reducer.py, Train.csv, execut.sh)  |
+                    +----------------------------------------------------+
+
+
+### Python Scripts
+
+#### [2] mapper.py
+
+Python script defining the mapping function for a MapReduce job, responsible for processing input data and emitting intermediate key-value pairs.
+
+                +----------------------------------------------------+
+                |                 Python MapReduce System             |
+                +----------------------------------------------------+
+                         |
+                         |  Input Data (Train.csv) & Python Scripts
+                         |
+                +----------------------------------------------------+
+                |                  Mapper Script                     |
+                |              (AggMapper class)                     |
+                +----------------------------------------------------+
+                         |
+                         |  Inter-process Communication (stdin/stdout)
+                         |
+                +----------------------------------------------------+
+                |                Reducer Script                      |
+                |               (AggReducer class)                    |
+                +----------------------------------------------------+
 
 
 ## 6. Conclusion
