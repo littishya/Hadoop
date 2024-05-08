@@ -177,14 +177,23 @@ Finally, inspect the output files to view the results of the MapReduce job.
 The output provided represents the data aggregated value calculated for each category based on the input data processed by the MapReduce job. Each line consists of a category name followed by its corresponding average value. 
 
 ==> Category Name
+
 The category names listed (Breads, Dairy, Frozen Foods, Health and Hygiene, Soft Drinks) represent different product categories.
+
 ==> Average Value
+
 The average value associated with each category represents some metric or measure related to the products in that category. However, it represent various metrics such as sales volume, revenue, quantity sold, or any other numerical attribute associated with the products in each category.
+
 ==> Comparison
+
 By comparing the average values across different categories, we can identify patterns or trends in the data.That is, if Dairy has a significantly higher average value compared to Soft Drinks, it could indicate that dairy products are more popular or more profitable than soft drinks.
+
 ==> Insights
+
 The average values provide insights into the distribution or characteristics of products within each category. For instance, a higher average value might suggest that products in that category are more expensive or have higher sales volumes on average.
+
 ==> Decision Making
+
 These average values can inform decision-making processes for businesses. For example, based on the average values, businesses can adjust pricing strategies, allocate resources to different product categories, or identify areas for improvement or investment.
 
 
