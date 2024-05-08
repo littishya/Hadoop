@@ -126,6 +126,7 @@ First, build the Docker image using the provided Dockerfile. Navigate to the dir
 
  > docker build -t hadoop-cluster .
 [2] Start Docker Container
+
 Once the image is built, start a Docker container using the following command:
 
  > docker run -it --name hadoop-container hadoop-cluster
