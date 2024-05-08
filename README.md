@@ -28,10 +28,10 @@ Output Generation: Finally, generated output files summarizing the findings of o
 
 ## Technologies
 
-### Redis: In-Memory Data Structure Store
+### Hadoop: 
 
-- Redis is an advanced key-value store known for its speed and versatility
-- Functioning as an in-memory data structure store, Redis holds data in RAM,
+--> Redis is an advanced key-value store known for its speed and versatility
+--> Functioning as an in-memory data structure store, Redis holds data in RAM,
   allowing for fast read and write operations
 - It supports various data structures, including strings, hashes, lists, and
   sets, making it suitable for a wide range of use cases
